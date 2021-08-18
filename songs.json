@@ -1,4 +1,4 @@
-songs = [{
+[{
 		"id": 1,
 		"Track Name": "Reggaetón Lento (Bailemos)",
 		"Artist": "CNCO",
@@ -20000,38 +20000,3 @@ songs = [{
 		"URL": "https://open.spotify.com/track/7cvw9YXDn35Ra6xCrIqVNZ"
 	}
 ]
-
-import flask
-from flask import request, jsonify
-import random
-
-app = flask.Flask(__name__)
-# app.config["DEBUG"] = True
-
-@app.route('/', methods=['GET'])
-def home():
-    return '''<h1>Songs Recommendation</h1>
-<p>A prototype API for Songs Recommendation.</p>'''
-
-
-@app.route('/api/songs/all', methods=['GET'])
-def api_all():
-    return jsonify(songs)
-
-
-@app.route('/api/songs/random', methods=['GET'])
-def api_id():
-    results = []
-    r = random.randint(1,4000)
-    # r0 = str(r)
-    # Loop through the data and match results that fit the requested ID.
-    # IDs are unique, but other fields might return many results
-    for song in songs:
-        if song['id'] == r:
-            results.append(song)
-
-    # Use the jsonify function from Flask to convert our list of
-    # Python dictionaries to the JSON format.
-    return jsonify(results)
-if __name__ == "__main__":
-    app.run(debug = True, use_reloader=False)
